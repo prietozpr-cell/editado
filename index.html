@@ -59,9 +59,9 @@
       min-height: 70vh;
     }
 
-    /* Bloque visible superior (Oculto inicialmente hasta finalizar la cuenta atrás) */
+    /* BANNER SUPERIOR: Oculto de forma estricta por defecto */
     .hero-banner {
-      display: none;
+      display: none !important;
       background: rgba(255, 215, 0, 0.1);
       border: 1px solid var(--accent-color);
       border-radius: 12px;
@@ -77,8 +77,9 @@
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
-    .hero-banner.visible {
-      display: flex;
+    /* Clase activa que se aplica solo al terminar la cuenta atrás */
+    .hero-banner.activado {
+      display: flex !important;
       opacity: 1;
       transform: translateY(0);
     }
@@ -105,17 +106,44 @@
       margin-bottom: 1.5rem;
     }
 
-    /* Cuenta atrás */
+    /* CUADRO CON CUENTA ATRÁS Y BORDES DORADOS EN MOVIMIENTO */
+    @keyframes goldGlowRotate {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
     .countdown-container {
+      position: relative;
       margin: 1.5rem 0 2rem 0;
       background: var(--card-bg);
       padding: 1.8rem 2rem;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 215, 0, 0.3);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      border-radius: 14px;
       max-width: 600px;
       width: 100%;
       transition: opacity 0.5s ease;
+      z-index: 1;
+    }
+
+    /* Borde dorado animado */
+    .countdown-container::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(90deg, #ffd700, #b8860b, #fff8dc, #ffd700, #ffae00);
+      background-size: 300% 300%;
+      border-radius: 16px;
+      z-index: -1;
+      animation: goldGlowRotate 4s ease infinite;
     }
 
     .countdown-title {
@@ -421,7 +449,7 @@
 
   <!-- Hero Section -->
   <header class="hero">
-    <!-- Bloque superior visible (Solo aparece al finalizar la cuenta atrás) -->
+    <!-- Bloque superior visible (Oculto mientras la cuenta atrás esté activa) -->
     <div class="hero-banner" id="heroBanner">
       <h2>FORMULARIOS YA ABIERTOS</h2>
       <a 
@@ -439,7 +467,7 @@
     
     <h1>Bienvenido a Bacano World</h1>
 
-    <!-- Cuenta atrás -->
+    <!-- Cuenta atrás con bordes dorados en movimiento -->
     <div class="countdown-container" id="countdownContainer">
       <div class="countdown-title" id="countdownTitle">Las inscripciones para el primer festival de Bacano abrirán en:</div>
       <div class="timer" id="timerBox">
@@ -590,7 +618,7 @@
       const trajectorySection = document.querySelector('#trayectoria');
 
       const animateCounters = () => {
-        const duration = 2500; // Duración total sincronizada (2.5s)
+        const duration = 2500;
         const startTime = performance.now();
 
         const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
@@ -633,14 +661,20 @@
       }
     });
 
-    // 2. Reloj Cuenta Atrás hasta el 6 de Agosto de 2026 a las 12:00 (Hora Peninsular de España CEST - UTC+2)
+    // 2. Control estricto de visibilidad para el banner superior y lógica de la Cuenta Atrás
     const targetDate = new Date('2026-08-06T12:00:00+02:00').getTime();
 
     const checkCountdown = () => {
       const now = new Date().getTime();
       const difference = targetDate - now;
 
+      const countdownContainer = document.getElementById("countdownContainer");
+      const heroBanner = document.getElementById("heroBanner");
+
       if (difference > 0) {
+        // La cuenta atrás sigue activa: asegura que el banner esté completamente oculto
+        heroBanner.classList.remove("activado");
+
         const days = Math.floor(difference / (1000 * 60 * 60 * 24));
         const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
@@ -651,16 +685,13 @@
         document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
         document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
       } else {
+        // La fecha se ha alcanzado: Oculta la cuenta atrás y muestra el banner superior
         clearInterval(countdownInterval);
         
-        // Ocultar cuenta atrás y mostrar el bloque superior con animación elegante
-        const countdownContainer = document.getElementById("countdownContainer");
-        const heroBanner = document.getElementById("heroBanner");
-
         countdownContainer.style.opacity = "0";
         setTimeout(() => {
           countdownContainer.style.display = "none";
-          heroBanner.classList.add("visible");
+          heroBanner.classList.add("activado");
         }, 500);
       }
     };
