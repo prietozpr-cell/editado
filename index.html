@@ -59,27 +59,6 @@
       min-height: 70vh;
     }
 
-    /* ELEMENTOS OCULTOS DURANTE LA CUENTA ATRÁS */
-    .hero-banner,
-    .btn-inscribete-main {
-      display: none !important;
-      opacity: 0;
-      transform: translateY(-10px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    /* Se activan automáticamente al finalizar la cuenta atrás */
-    .hero-banner.activado,
-    .btn-inscribete-main.activado {
-      display: flex !important;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .btn-inscribete-main.activado {
-      display: inline-block !important;
-    }
-
     .hero-banner {
       background: rgba(255, 215, 0, 0.1);
       border: 1px solid var(--accent-color);
@@ -202,6 +181,11 @@
     .btn-primary:hover {
       transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    }
+
+    /* Ocultar botones estrictamente por clase también */
+    #btnInscribeteMain, #heroBanner {
+      display: none !important;
     }
 
     /* Secciones Generales */
@@ -472,8 +456,8 @@
 
   <!-- Hero Section -->
   <header class="hero">
-    <!-- Bloque superior (Oculto hasta finalizar cuenta atrás) -->
-    <div class="hero-banner" id="heroBanner">
+    <!-- Bloque superior (Completamente oculto en linea) -->
+    <div class="hero-banner" id="heroBanner" style="display: none !important;">
       <h2>FORMULARIOS YA ABIERTOS</h2>
       <a 
         href="https://docs.google.com/forms/d/e/1FAIpQLScReEPVZ1YcUruacPpzO_BmEiFaPpfYRSLTTyqUwsN_-WMLfg/viewform?usp=dialog" 
@@ -501,13 +485,14 @@
       </div>
     </div>
     
-    <!-- Botón Principal (Oculto hasta finalizar cuenta atrás) -->
+    <!-- Botón Principal (Completamente oculto en linea) -->
     <a 
       href="https://docs.google.com/forms/d/e/1FAIpQLScReEPVZ1YcUruacPpzO_BmEiFaPpfYRSLTTyqUwsN_-WMLfg/viewform?usp=dialog" 
       target="_blank" 
       rel="noopener noreferrer" 
-      class="btn-primary btn-inscribete-main"
+      class="btn-primary"
       id="btnInscribeteMain"
+      style="display: none !important;"
     >
       INSCRÍBETE
     </a>
@@ -686,7 +671,7 @@
       }
     });
 
-    // 2. Control de visibilidad para los botones de inscripción y Cuenta Atrás
+    // 2. Control de visibilidad
     const targetDate = new Date('2026-08-06T12:00:00+02:00').getTime();
 
     const checkCountdown = () => {
@@ -698,9 +683,9 @@
       const btnInscribeteMain = document.getElementById("btnInscribeteMain");
 
       if (difference > 0) {
-        // La cuenta atrás está activa: oculta banner y botón de inscripción
-        heroBanner.classList.remove("activado");
-        btnInscribeteMain.classList.remove("activado");
+        // Asegurar visibilidad oculta mientras cuenta atrás siga activa
+        heroBanner.style.setProperty("display", "none", "important");
+        btnInscribeteMain.style.setProperty("display", "none", "important");
 
         const days = Math.floor(difference / (1000 * 60 * 60 * 24));
         const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -712,14 +697,14 @@
         document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
         document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
       } else {
-        // La fecha límite se alcanza: oculta la cuenta atrás y muestra los elementos de inscripción
+        // Al terminar la cuenta atrás se hacen visibles
         clearInterval(countdownInterval);
         
         countdownContainer.style.opacity = "0";
         setTimeout(() => {
           countdownContainer.style.display = "none";
-          heroBanner.classList.add("activado");
-          btnInscribeteMain.classList.add("activado");
+          heroBanner.style.setProperty("display", "flex", "important");
+          btnInscribeteMain.style.setProperty("display", "inline-block", "important");
         }, 500);
       }
     };
