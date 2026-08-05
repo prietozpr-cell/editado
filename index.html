@@ -59,9 +59,28 @@
       min-height: 70vh;
     }
 
-    /* BANNER SUPERIOR: Oculto de forma estricta por defecto */
-    .hero-banner {
+    /* ELEMENTOS OCULTOS DURANTE LA CUENTA ATRÁS */
+    .hero-banner,
+    .btn-inscribete-main {
       display: none !important;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    /* Se activan automáticamente al finalizar la cuenta atrás */
+    .hero-banner.activado,
+    .btn-inscribete-main.activado {
+      display: flex !important;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn-inscribete-main.activado {
+      display: inline-block !important;
+    }
+
+    .hero-banner {
       background: rgba(255, 215, 0, 0.1);
       border: 1px solid var(--accent-color);
       border-radius: 12px;
@@ -72,16 +91,6 @@
       gap: 0.8rem;
       max-width: 500px;
       width: 100%;
-      opacity: 0;
-      transform: translateY(-10px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    /* Clase activa que se aplica solo al terminar la cuenta atrás */
-    .hero-banner.activado {
-      display: flex !important;
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .hero-banner h2 {
@@ -131,7 +140,6 @@
       z-index: 1;
     }
 
-    /* Borde dorado animado */
     .countdown-container::before {
       content: '';
       position: absolute;
@@ -370,6 +378,21 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
+    .contact-notice {
+      text-align: center;
+      color: var(--accent-color);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      max-width: 700px;
+      margin: 0 auto 1.5rem auto;
+      padding: 0.8rem 1rem;
+      background: rgba(255, 215, 0, 0.05);
+      border: 1px dashed rgba(255, 215, 0, 0.3);
+      border-radius: 8px;
+      text-transform: uppercase;
+    }
+
     .form-group {
       margin-bottom: 1.2rem;
       display: flex;
@@ -449,7 +472,7 @@
 
   <!-- Hero Section -->
   <header class="hero">
-    <!-- Bloque superior visible (Oculto mientras la cuenta atrás esté activa) -->
+    <!-- Bloque superior (Oculto hasta finalizar cuenta atrás) -->
     <div class="hero-banner" id="heroBanner">
       <h2>FORMULARIOS YA ABIERTOS</h2>
       <a 
@@ -478,12 +501,13 @@
       </div>
     </div>
     
-    <!-- Botón Principal -->
+    <!-- Botón Principal (Oculto hasta finalizar cuenta atrás) -->
     <a 
       href="https://docs.google.com/forms/d/e/1FAIpQLScReEPVZ1YcUruacPpzO_BmEiFaPpfYRSLTTyqUwsN_-WMLfg/viewform?usp=dialog" 
       target="_blank" 
       rel="noopener noreferrer" 
-      class="btn-primary"
+      class="btn-primary btn-inscribete-main"
+      id="btnInscribeteMain"
     >
       INSCRÍBETE
     </a>
@@ -582,6 +606,7 @@
   <!-- Formulario de Contacto Directo con Formspree -->
   <section id="contacto">
     <h2>Contacto</h2>
+    <p class="contact-notice">*ESTO NO SON LOS FORMULARIOS DE INSCRIPCION, ES UNICAMENTE PARA PEDIR INFORMACION*</p>
     <div class="contact-container">
       <form action="https://formspree.io/f/xyegyyga" method="POST">
         <div class="form-group">
@@ -612,7 +637,7 @@
 
   <!-- Scripts -->
   <script>
-    // 1. Contador Profesional Ultra-Fluido con Intersection Observer y Easing
+    // 1. Contador Profesional Ultra-Fluido
     document.addEventListener("DOMContentLoaded", () => {
       const counters = document.querySelectorAll('.counter');
       const trajectorySection = document.querySelector('#trayectoria');
@@ -661,7 +686,7 @@
       }
     });
 
-    // 2. Control estricto de visibilidad para el banner superior y lógica de la Cuenta Atrás
+    // 2. Control de visibilidad para los botones de inscripción y Cuenta Atrás
     const targetDate = new Date('2026-08-06T12:00:00+02:00').getTime();
 
     const checkCountdown = () => {
@@ -670,10 +695,12 @@
 
       const countdownContainer = document.getElementById("countdownContainer");
       const heroBanner = document.getElementById("heroBanner");
+      const btnInscribeteMain = document.getElementById("btnInscribeteMain");
 
       if (difference > 0) {
-        // La cuenta atrás sigue activa: asegura que el banner esté completamente oculto
+        // La cuenta atrás está activa: oculta banner y botón de inscripción
         heroBanner.classList.remove("activado");
+        btnInscribeteMain.classList.remove("activado");
 
         const days = Math.floor(difference / (1000 * 60 * 60 * 24));
         const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -685,13 +712,14 @@
         document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
         document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
       } else {
-        // La fecha se ha alcanzado: Oculta la cuenta atrás y muestra el banner superior
+        // La fecha límite se alcanza: oculta la cuenta atrás y muestra los elementos de inscripción
         clearInterval(countdownInterval);
         
         countdownContainer.style.opacity = "0";
         setTimeout(() => {
           countdownContainer.style.display = "none";
           heroBanner.classList.add("activado");
+          btnInscribeteMain.classList.add("activado");
         }, 500);
       }
     };
