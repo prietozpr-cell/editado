@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bacano</title>
+  <style>
+    :root {
+      --bg-color: #0b0b0b;
+      --card-bg: #141414;
+      --accent-color: #ffd700;
+      --text-color: #ffffff;
+      --text-muted: #a0a0a0;
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-main);
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      background: rgba(11, 11, 11, 0.9);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .navbar .logo {
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--accent-color);
+      letter-spacing: 1px;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 1.5rem;
+      min-height: 70vh;
+    }
+
+    .profile-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent-color);
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Botón Principal */
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--accent-color);
+      color: #000;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin-top: 1rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    }
+
+    /* Secciones Generales */
+    section {
+      padding: 4rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2.5rem;
+      color: var(--accent-color);
+    }
+
+    /* Sobre Nosotros */
+    .about-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2.5rem;
+      background-color: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .about-content {
+      flex: 1 1 300px;
+    }
+
+    .about-image-wrapper {
+      flex: 1 1 300px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .about-img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    /* Nuestra Trayectoria */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-item {
+      background-color: var(--card-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .stat-item h3 {
+      font-size: 2.2rem;
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-item p {
+      color: var(--text-muted);
+    }
+
+    /* Sponsors */
+    .sponsors-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .sponsor-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 220px;
+      height: 120px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .sponsor-logo {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .sponsor-logo:hover {
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .about-container {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">BACANO</div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <!-- 1. Foto de perfil -->
+    <img src="images/Bacano (2).png" alt="Perfil Bacano" class="profile-img">
+    
+    <h1>Bienvenido a Bacano</h1>
+    
+    <!-- 3. Botón Principal -->
+    <a 
+      href="https://docs.google.com/forms/d/e/1FAIpQLScReEPVZ1YcUruacPpzO_BmEiFaPpfYRSLTTyqUwsN_-WMLfg/viewform?usp=dialog" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="btn-primary"
+    >
+      INSCRÍBETE AL FORMULARIO
+    </a>
+  </header>
+
+  <!-- 2. Sobre nosotros -->
+  <section id="sobre-nosotros">
+    <h2>Sobre nosotros</h2>
+    <div class="about-container">
+      <div class="about-content">
+        <p>Impulsando eventos, proyectos musicales y experiencias únicas a lo largo de toda España.</p>
+      </div>
+      <div class="about-image-wrapper">
+        <img src="images/Imagen de WhatsApp 2026-08-05 a las 13.03.51.jpeg" alt="Sobre nosotros" class="about-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Nuestra trayectoria -->
+  <section id="trayectoria">
+    <h2>Nuestra trayectoria</h2>
+    <div class="stats-container">
+      <div class="stat-item">
+        <h3>+<span class="counter" data-target="1000000">0</span></h3>
+        <p>Más de 1 millón de cuentas alcanzadas</p>
+      </div>
+      <div class="stat-item">
+        <h3>+<span class="counter" data-target="5000">0</span></h3>
+        <p>Más de 5.000 tickets vendidos</p>
+      </div>
+      <div class="stat-item">
+        <h3>+<span class="counter" data-target="30">0</span></h3>
+        <p>Más de 30 eventos y showcases por España</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Sponsors -->
+  <section id="sponsors">
+    <h2>Sponsors</h2>
+    <div class="sponsors-container">
+      <div class="sponsor-card">
+        <img src="images/Logotipo de Senli 30x20.png" alt="Sponsor Senli Studio" class="sponsor-logo">
+      </div>
+      <div class="sponsor-card">
+        <img src="images/3 Estrellas 2 (1).png" alt="Sponsor 3 Estrellas" class="sponsor-logo">
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Bacano. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Script Animación Numérica -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const counters = document.querySelectorAll('.counter');
+      const trajectorySection = document.querySelector('#trayectoria');
+
+      const animateCounters = () => {
+        counters.forEach(counter => {
+          const target = +counter.getAttribute('data-target');
+          const duration = 2000;
+          const startTime = performance.now();
+
+          const updateCount = (currentTime) => {
+            const elapsedTime = currentTime - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+            
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            const currentValue = Math.floor(easeProgress * target);
+
+            counter.innerText = currentValue.toLocaleString('es-ES');
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCount);
+            } else {
+              counter.innerText = target.toLocaleString('es-ES');
+            }
+          };
+
+          requestAnimationFrame(updateCount);
+        });
+      };
+
+      const observerOptions = {
+        root: null,
+        threshold: 0.3
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      if (trajectorySection) {
+        observer.observe(trajectorySection);
+      }
+    });
+  </script>
+</body>
+</html>
