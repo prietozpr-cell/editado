@@ -74,6 +74,47 @@
       margin-bottom: 1rem;
     }
 
+    /* Cuenta atrás */
+    .countdown-container {
+      margin: 1.5rem 0;
+      background: var(--card-bg);
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .countdown-title {
+      font-size: 1.1rem;
+      color: var(--accent-color);
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .timer {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    .time-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .time-box span {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .time-box label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
     /* Botón Principal */
     .btn-primary {
       display: inline-block;
@@ -163,6 +204,85 @@
       color: var(--text-muted);
     }
 
+    /* Contacto con pestañitas */
+    .contact-container {
+      background-color: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 16px;
+      max-width: 700px;
+      margin: 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 0.5rem;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.6rem 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn.active {
+      background-color: var(--accent-color);
+      color: #000;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+      color: var(--text-color);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 0.8rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent-color);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 0.9rem;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: opacity 0.2s ease;
+    }
+
+    .btn-submit:hover {
+      opacity: 0.9;
+    }
+
     /* Sponsors */
     .sponsors-container {
       display: flex;
@@ -211,6 +331,12 @@
       .about-container {
         padding: 1.5rem;
       }
+      .timer {
+        gap: 0.8rem;
+      }
+      .time-box span {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -227,6 +353,17 @@
     <img src="images/perfil.png" alt="Perfil Bacano" class="profile-img">
     
     <h1>Bienvenido a Bacano</h1>
+
+    <!-- Cuenta atrás -->
+    <div class="countdown-container">
+      <div class="countdown-title">Próximo gran evento en</div>
+      <div class="timer">
+        <div class="time-box"><span id="days">00</span><label>Días</label></div>
+        <div class="time-box"><span id="hours">00</span><label>Horas</label></div>
+        <div class="time-box"><span id="minutes">00</span><label>Min</label></div>
+        <div class="time-box"><span id="seconds">00</span><label>Seg</label></div>
+      </div>
+    </div>
     
     <!-- Botón Principal -->
     <a 
@@ -271,6 +408,34 @@
     </div>
   </section>
 
+  <!-- Contacto con Pestañas -->
+  <section id="contacto">
+    <h2>Contacta con nosotros</h2>
+    <div class="contact-container">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="setCategory('General')">General</button>
+        <button class="tab-btn" onclick="setCategory('Eventos')">Eventos</button>
+        <button class="tab-btn" onclick="setCategory('Sponsors')">Sponsors</button>
+      </div>
+      <form onsubmit="handleSubmit(event)">
+        <input type="hidden" id="categoryInput" value="General">
+        <div class="form-group">
+          <label for="name">Nombre completo</label>
+          <input type="text" id="name" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" placeholder="tu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Mensaje</label>
+          <textarea id="message" rows="4" placeholder="¿En qué podemos ayudarte?" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Enviar mensaje</button>
+      </form>
+    </div>
+  </section>
+
   <!-- Sponsors -->
   <section id="sponsors">
     <h2>Sponsors</h2>
@@ -289,8 +454,9 @@
     <p>&copy; 2026 Bacano. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- Script Animación Numérica -->
+  <!-- Scripts -->
   <script>
+    // 1. Animación Numérica (Intersection Observer)
     document.addEventListener("DOMContentLoaded", () => {
       const counters = document.querySelectorAll('.counter');
       const trajectorySection = document.querySelector('#trayectoria');
@@ -321,11 +487,6 @@
         });
       };
 
-      const observerOptions = {
-        root: null,
-        threshold: 0.3
-      };
-
       const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -333,12 +494,48 @@
             observer.unobserve(entry.target);
           }
         });
-      }, observerOptions);
+      }, { threshold: 0.3 });
 
       if (trajectorySection) {
         observer.observe(trajectorySection);
       }
     });
+
+    // 2. Cuenta Atrás (Ajusta la fecha final aquí si lo deseas)
+    const eventDate = new Date().getTime() + (30 * 24 * 60 * 60 * 1000); // 30 días a partir de hoy
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const difference = eventDate - now;
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+        document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+        document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+      }
+    }, 1000);
+
+    // 3. Sistema de Pestañas de Contacto
+    function setCategory(category) {
+      document.getElementById('categoryInput').value = category;
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const category = document.getElementById('categoryInput').value;
+      alert(`¡Gracias ${name}! Hemos recibido tu consulta sobre "${category}". Te responderemos lo antes posible.`);
+      e.target.reset();
+    }
   </script>
 </body>
 </html>
