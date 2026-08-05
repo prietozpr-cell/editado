@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bacano</title>
+  <title>Bacano World</title>
   <style>
     :root {
       --bg-color: #0b0b0b;
@@ -55,8 +55,30 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 4rem 1.5rem;
+      padding: 4rem 1.5rem 2rem 1.5rem;
       min-height: 70vh;
+    }
+
+    /* Bloque visible superior */
+    .hero-banner {
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid var(--accent-color);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .hero-banner h2 {
+      color: var(--accent-color);
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 1px;
     }
 
     .profile-img {
@@ -82,15 +104,15 @@
       border-radius: 12px;
       border: 1px solid rgba(255, 215, 0, 0.3);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      max-width: 600px;
+      width: 100%;
     }
 
     .countdown-title {
-      font-size: 1.1rem;
-      color: var(--accent-color);
-      margin-bottom: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-color);
+      margin-bottom: 1rem;
+      font-weight: 600;
     }
 
     .timer {
@@ -108,7 +130,7 @@
     .time-box span {
       font-size: 2.2rem;
       font-weight: 800;
-      color: #fff;
+      color: var(--accent-color);
     }
 
     .time-box label {
@@ -146,8 +168,17 @@
     section h2 {
       text-align: center;
       font-size: 2rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 1rem;
       color: var(--accent-color);
+      text-transform: uppercase;
+    }
+
+    .section-desc {
+      text-align: center;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 2.5rem auto;
+      font-size: 1.05rem;
     }
 
     /* Sobre Nosotros */
@@ -166,6 +197,11 @@
       flex: 1 1 300px;
     }
 
+    .about-content p {
+      font-size: 1.1rem;
+      color: var(--text-color);
+    }
+
     .about-image-wrapper {
       flex: 1 1 300px;
       display: flex;
@@ -178,6 +214,85 @@
       height: auto;
       border-radius: 12px;
       object-fit: cover;
+    }
+
+    /* Sección Premios */
+    .prizes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .prize-card {
+      background-color: var(--card-bg);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .prize-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 215, 0, 0.3);
+    }
+
+    .prize-card h3 {
+      font-size: 1.4rem;
+      color: var(--accent-color);
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 0.5rem;
+    }
+
+    .prize-card ul {
+      list-style: none;
+    }
+
+    .prize-card ul li {
+      margin-bottom: 0.8rem;
+      position: relative;
+      padding-left: 1.2rem;
+      color: var(--text-color);
+    }
+
+    .prize-card ul li::before {
+      content: "•";
+      color: var(--accent-color);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    /* Sponsors */
+    .sponsors-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .sponsor-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 220px;
+      height: 120px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .sponsor-logo {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .sponsor-logo:hover {
+      transform: scale(1.05);
     }
 
     /* Nuestra Trayectoria */
@@ -205,7 +320,7 @@
       color: var(--text-muted);
     }
 
-    /* Contacto con Pestañas */
+    /* Formulario de Contacto */
     .contact-container {
       background-color: var(--card-bg);
       padding: 2.5rem;
@@ -213,39 +328,6 @@
       max-width: 700px;
       margin: 0 auto;
       border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .tabs {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 0.5rem;
-    }
-
-    .tab-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      padding: 0.7rem 1.4rem;
-      font-weight: 600;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-      font-size: 1rem;
-    }
-
-    .tab-btn.active {
-      background-color: var(--accent-color);
-      color: #000;
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
     }
 
     .form-group {
@@ -293,48 +375,6 @@
       opacity: 0.9;
     }
 
-    .external-form-box {
-      text-align: center;
-      padding: 1.5rem 0;
-    }
-
-    .external-form-box p {
-      margin-bottom: 1.5rem;
-      color: var(--text-muted);
-    }
-
-    /* Sponsors */
-    .sponsors-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-    }
-
-    .sponsor-card {
-      background: var(--card-bg);
-      padding: 1.5rem;
-      border-radius: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 220px;
-      height: 120px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .sponsor-logo {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      transition: transform 0.3s ease;
-    }
-
-    .sponsor-logo:hover {
-      transform: scale(1.05);
-    }
-
     /* Footer */
     footer {
       text-align: center;
@@ -364,20 +404,33 @@
 
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="logo">BACANO</div>
+    <div class="logo">BACANO WORLD</div>
   </nav>
 
   <!-- Hero Section -->
   <header class="hero">
-    <!-- Foto de perfil -->
-    <img src="images/perfil.png" alt="Perfil Bacano" class="profile-img">
+    <!-- Bloque superior visible -->
+    <div class="hero-banner">
+      <h2>FORMULARIOS YA ABIERTOS</h2>
+      <a 
+        href="https://docs.google.com/forms/d/e/1FAIpQLScReEPVZ1YcUruacPpzO_BmEiFaPpfYRSLTTyqUwsN_-WMLfg/viewform?usp=dialog" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="btn-primary"
+      >
+        INSCRIBIRME AHORA
+      </a>
+    </div>
+
+    <!-- Foto de perfil principal -->
+    <img src="perfil.png" alt="Perfil Bacano" class="profile-img">
     
-    <h1>Bienvenido a Bacano</h1>
+    <h1>Bienvenido a Bacano World</h1>
 
     <!-- Cuenta atrás -->
-    <div class="countdown-container">
-      <div class="countdown-title">Próximo gran evento en</div>
-      <div class="timer">
+    <div class="countdown-container" id="countdownContainer">
+      <div class="countdown-title" id="countdownTitle">Las inscripciones para el primer festival de Bacano abrirán en:</div>
+      <div class="timer" id="timerBox">
         <div class="time-box"><span id="days">00</span><label>Días</label></div>
         <div class="time-box"><span id="hours">00</span><label>Horas</label></div>
         <div class="time-box"><span id="minutes">00</span><label>Min</label></div>
@@ -392,19 +445,77 @@
       rel="noopener noreferrer" 
       class="btn-primary"
     >
-      INSCRÍBETE AL FORMULARIO
+      INSCRÍBETE
     </a>
   </header>
 
   <!-- Sobre nosotros -->
   <section id="sobre-nosotros">
-    <h2>Sobre nosotros</h2>
+    <h2>Festivales para artistas emergentes</h2>
     <div class="about-container">
       <div class="about-content">
-        <p>Impulsando eventos, proyectos musicales y experiencias únicas a lo largo de toda España.</p>
+        <p>Organizamos festivales para artistas emergentes y conectamos cantantes, DJs, productores, diseñadores y creativos en un mismo ecosistema para impulsar talento real.</p>
       </div>
       <div class="about-image-wrapper">
-        <img src="images/nosotros.jpg" alt="Sobre nosotros" class="about-img">
+        <img src="nosotros.jpg" alt="Sobre nosotros" class="about-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Premios -->
+  <section id="premios">
+    <h2>PREMIOS</h2>
+    <p class="section-desc">Bacano World celebrará cinco ediciones. De cada edición saldrán dos ganadores. Una vez finalicen las cinco ediciones, todos los ganadores competirán en una Gran Final.</p>
+
+    <div class="prizes-grid">
+      <!-- 1er Puesto -->
+      <div class="prize-card">
+        <h3>🥇 PRIMER PUESTO</h3>
+        <ul>
+          <li>Actuación en Indomable Party</li>
+          <li>Acceso durante 1 mes a Bacano Agency</li>
+          <li>Camiseta Indomable Football Club de manga corta (Selly Studio)</li>
+          <li>Vídeo promocional del artista en las cuentas de Prietoz y Bacano World</li>
+          <li>100 € en productos de GLWP</li>
+          <li>Inscripción directa a la siguiente edición</li>
+        </ul>
+      </div>
+
+      <!-- 2do Puesto -->
+      <div class="prize-card">
+        <h3>🥈 SEGUNDO PUESTO</h3>
+        <ul>
+          <li>Gorra Selly Studio</li>
+          <li>Inscripción directa a la siguiente edición</li>
+          <li>Portada Visualizer de Gold Beat</li>
+          <li>30 € en productos de GLWP</li>
+        </ul>
+      </div>
+
+      <!-- 3er Puesto -->
+      <div class="prize-card">
+        <h3>🥉 TERCER PUESTO</h3>
+        <ul>
+          <li>Camiseta básica Selly Studio</li>
+          <li>Inscripción directa a la siguiente edición</li>
+          <li>Pegatinas GLWP</li>
+          <li>30% de descuento en toda la web de GLWP</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sponsors -->
+  <section id="sponsors">
+    <h2>SPONSORS</h2>
+    <p class="section-desc">Estas son las marcas que hacen posible este proyecto.</p>
+
+    <div class="sponsors-grid">
+      <div class="sponsor-card">
+        <img src="sponsor1.png" alt="Sponsor 1" class="sponsor-logo">
+      </div>
+      <div class="sponsor-card">
+        <img src="sponsor2.png" alt="Sponsor 2" class="sponsor-logo">
       </div>
     </div>
   </section>
@@ -415,86 +526,53 @@
     <div class="stats-container">
       <div class="stat-item">
         <h3>+<span class="counter" data-target="1000000">0</span></h3>
-        <p>Más de 1 millón de cuentas alcanzadas</p>
+        <p>cuentas alcanzadas</p>
       </div>
       <div class="stat-item">
         <h3>+<span class="counter" data-target="5000">0</span></h3>
-        <p>Más de 5.000 tickets vendidos</p>
+        <p>tickets vendidos</p>
       </div>
       <div class="stat-item">
         <h3>+<span class="counter" data-target="30">0</span></h3>
-        <p>Más de 30 eventos y showcases por España</p>
+        <p>eventos y showcases por España</p>
       </div>
     </div>
   </section>
 
-  <!-- Contacto con Pestañas -->
+  <!-- Formulario de Contacto Directo con Formspree -->
   <section id="contacto">
-    <h2>Contacto y Registro</h2>
+    <h2>Contacto</h2>
     <div class="contact-container">
-      <!-- Botones de Pestañas -->
-      <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab(event, 'tab-form')">Registro Formulario</button>
-        <button class="tab-btn" onclick="switchTab(event, 'tab-direct')">Contacto Directo</button>
-      </div>
-
-      <!-- Pestaña 1: Registro Formulario Externo -->
-      <div id="tab-form" class="tab-content active">
-        <div class="external-form-box">
-          <p>Accede a nuestro formulario oficial para inscribirte en los próximos eventos y convocatorias.</p>
-          <a 
-            href="https://docs.google.com/forms/d/e/1FAIpQLScReEPVZ1YcUruacPpzO_BmEiFaPpfYRSLTTyqUwsN_-WMLfg/viewform?usp=dialog" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="btn-primary"
-          >
-            Abrir Formulario de Registro
-          </a>
+      <form action="https://formspree.io/f/xyegyyga" method="POST">
+        <div class="form-group">
+          <label for="name">Nombre completo</label>
+          <input type="text" id="name" name="nombre" placeholder="Tu nombre" required>
         </div>
-      </div>
-
-      <!-- Pestaña 2: Formulario Directo -->
-      <div id="tab-direct" class="tab-content">
-        <form onsubmit="handleSubmit(event)">
-          <div class="form-group">
-            <label for="name">Nombre completo</label>
-            <input type="text" id="name" placeholder="Tu nombre" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" placeholder="tu@email.com" required>
-          </div>
-          <div class="form-group">
-            <label for="message">Mensaje</label>
-            <textarea id="message" rows="4" placeholder="Escribe aquí tu consulta..." required></textarea>
-          </div>
-          <button type="submit" class="btn-submit">Enviar mensaje</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sponsors -->
-  <section id="sponsors">
-    <h2>Sponsors</h2>
-    <div class="sponsors-container">
-      <div class="sponsor-card">
-        <img src="images/sponsor1.png" alt="Sponsor Senli Studio" class="sponsor-logo">
-      </div>
-      <div class="sponsor-card">
-        <img src="images/sponsor2.png" alt="Sponsor 3 Estrellas" class="sponsor-logo">
-      </div>
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="subject">Asunto</label>
+          <input type="text" id="subject" name="asunto" placeholder="Motivo de consulta">
+        </div>
+        <div class="form-group">
+          <label for="message">Mensaje</label>
+          <textarea id="message" name="mensaje" rows="4" placeholder="Escribe tu mensaje..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Enviar mensaje</button>
+      </form>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2026 Bacano. Todos los derechos reservados.</p>
+    <p>&copy; 2026 Bacano World. Todos los derechos reservados.</p>
   </footer>
 
   <!-- Scripts -->
   <script>
-    // 1. Animación Numérica
+    // 1. Animación Numérica Count-up (Intersection Observer)
     document.addEventListener("DOMContentLoaded", () => {
       const counters = document.querySelectorAll('.counter');
       const trajectorySection = document.querySelector('#trayectoria');
@@ -539,12 +617,12 @@
       }
     });
 
-    // 2. Reloj Cuenta Atrás
-    const eventDate = new Date().getTime() + (30 * 24 * 60 * 60 * 1000);
+    // 2. Reloj Cuenta Atrás hasta el 6 de Agosto de 2026 a las 12:00 (Hora España CEST - UTC+2)
+    const targetDate = new Date('2026-08-06T12:00:00+02:00').getTime();
 
-    setInterval(() => {
+    const countdownInterval = setInterval(() => {
       const now = new Date().getTime();
-      const difference = eventDate - now;
+      const difference = targetDate - now;
 
       if (difference > 0) {
         const days = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -556,28 +634,15 @@
         document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
         document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
         document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+      } else {
+        clearInterval(countdownInterval);
+        document.getElementById("timerBox").style.display = "none";
+        document.getElementById("countdownTitle").innerText = "FORMULARIOS YA ABIERTOS";
+        document.getElementById("countdownTitle").style.fontSize = "1.5rem";
+        document.getElementById("countdownTitle").style.color = "var(--accent-color)";
+        document.getElementById("countdownTitle").style.fontWeight = "800";
       }
     }, 1000);
-
-    // 3. Cambio de Pestañas
-    function switchTab(evt, tabId) {
-      const tabContents = document.querySelectorAll('.tab-content');
-      tabContents.forEach(content => content.classList.remove('active'));
-
-      const tabButtons = document.querySelectorAll('.tab-btn');
-      tabButtons.forEach(btn => btn.classList.remove('active'));
-
-      document.getElementById(tabId).classList.add('active');
-      evt.currentTarget.classList.add('active');
-    }
-
-    // 4. Envío de formulario directo
-    function handleSubmit(e) {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      alert(`¡Gracias ${name}! Hemos recibido tu mensaje.`);
-      e.target.reset();
-    }
   </script>
 </body>
 </html>
