@@ -76,11 +76,12 @@
 
     /* Cuenta atrás */
     .countdown-container {
-      margin: 1.5rem 0;
+      margin: 1.5rem 0 2rem 0;
       background: var(--card-bg);
       padding: 1.5rem 2rem;
       border-radius: 12px;
-      border: 1px solid rgba(255, 215, 0, 0.2);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     }
 
     .countdown-title {
@@ -89,6 +90,7 @@
       margin-bottom: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 1px;
+      font-weight: 700;
     }
 
     .timer {
@@ -104,7 +106,7 @@
     }
 
     .time-box span {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 800;
       color: #fff;
     }
@@ -127,7 +129,6 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      margin-top: 1rem;
     }
 
     .btn-primary:hover {
@@ -204,7 +205,7 @@
       color: var(--text-muted);
     }
 
-    /* Contacto con pestañitas */
+    /* Contacto con Pestañas */
     .contact-container {
       background-color: var(--card-bg);
       padding: 2.5rem;
@@ -217,7 +218,7 @@
     .tabs {
       display: flex;
       gap: 0.5rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       padding-bottom: 0.5rem;
     }
@@ -226,16 +227,25 @@
       background: none;
       border: none;
       color: var(--text-muted);
-      padding: 0.6rem 1.2rem;
+      padding: 0.7rem 1.4rem;
       font-weight: 600;
       cursor: pointer;
       border-radius: 6px;
       transition: all 0.3s ease;
+      font-size: 1rem;
     }
 
     .tab-btn.active {
       background-color: var(--accent-color);
       color: #000;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
     }
 
     .form-group {
@@ -281,6 +291,16 @@
 
     .btn-submit:hover {
       opacity: 0.9;
+    }
+
+    .external-form-box {
+      text-align: center;
+      padding: 1.5rem 0;
+    }
+
+    .external-form-box p {
+      margin-bottom: 1.5rem;
+      color: var(--text-muted);
     }
 
     /* Sponsors */
@@ -410,29 +430,47 @@
 
   <!-- Contacto con Pestañas -->
   <section id="contacto">
-    <h2>Contacta con nosotros</h2>
+    <h2>Contacto y Registro</h2>
     <div class="contact-container">
+      <!-- Botones de Pestañas -->
       <div class="tabs">
-        <button class="tab-btn active" onclick="setCategory('General')">General</button>
-        <button class="tab-btn" onclick="setCategory('Eventos')">Eventos</button>
-        <button class="tab-btn" onclick="setCategory('Sponsors')">Sponsors</button>
+        <button class="tab-btn active" onclick="switchTab(event, 'tab-form')">Registro Formulario</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-direct')">Contacto Directo</button>
       </div>
-      <form onsubmit="handleSubmit(event)">
-        <input type="hidden" id="categoryInput" value="General">
-        <div class="form-group">
-          <label for="name">Nombre completo</label>
-          <input type="text" id="name" placeholder="Tu nombre" required>
+
+      <!-- Pestaña 1: Registro Formulario Externo -->
+      <div id="tab-form" class="tab-content active">
+        <div class="external-form-box">
+          <p>Accede a nuestro formulario oficial para inscribirte en los próximos eventos y convocatorias.</p>
+          <a 
+            href="https://docs.google.com/forms/d/e/1FAIpQLScReEPVZ1YcUruacPpzO_BmEiFaPpfYRSLTTyqUwsN_-WMLfg/viewform?usp=dialog" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn-primary"
+          >
+            Abrir Formulario de Registro
+          </a>
         </div>
-        <div class="form-group">
-          <label for="email">Correo electrónico</label>
-          <input type="email" id="email" placeholder="tu@email.com" required>
-        </div>
-        <div class="form-group">
-          <label for="message">Mensaje</label>
-          <textarea id="message" rows="4" placeholder="¿En qué podemos ayudarte?" required></textarea>
-        </div>
-        <button type="submit" class="btn-submit">Enviar mensaje</button>
-      </form>
+      </div>
+
+      <!-- Pestaña 2: Formulario Directo -->
+      <div id="tab-direct" class="tab-content">
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">Nombre completo</label>
+            <input type="text" id="name" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" placeholder="tu@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Mensaje</label>
+            <textarea id="message" rows="4" placeholder="Escribe aquí tu consulta..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Enviar mensaje</button>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -456,7 +494,7 @@
 
   <!-- Scripts -->
   <script>
-    // 1. Animación Numérica (Intersection Observer)
+    // 1. Animación Numérica
     document.addEventListener("DOMContentLoaded", () => {
       const counters = document.querySelectorAll('.counter');
       const trajectorySection = document.querySelector('#trayectoria');
@@ -501,8 +539,8 @@
       }
     });
 
-    // 2. Cuenta Atrás (Ajusta la fecha final aquí si lo deseas)
-    const eventDate = new Date().getTime() + (30 * 24 * 60 * 60 * 1000); // 30 días a partir de hoy
+    // 2. Reloj Cuenta Atrás
+    const eventDate = new Date().getTime() + (30 * 24 * 60 * 60 * 1000);
 
     setInterval(() => {
       const now = new Date().getTime();
@@ -521,19 +559,23 @@
       }
     }, 1000);
 
-    // 3. Sistema de Pestañas de Contacto
-    function setCategory(category) {
-      document.getElementById('categoryInput').value = category;
-      const buttons = document.querySelectorAll('.tab-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+    // 3. Cambio de Pestañas
+    function switchTab(evt, tabId) {
+      const tabContents = document.querySelectorAll('.tab-content');
+      tabContents.forEach(content => content.classList.remove('active'));
+
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      evt.currentTarget.classList.add('active');
     }
 
+    // 4. Envío de formulario directo
     function handleSubmit(e) {
       e.preventDefault();
       const name = document.getElementById('name').value;
-      const category = document.getElementById('categoryInput').value;
-      alert(`¡Gracias ${name}! Hemos recibido tu consulta sobre "${category}". Te responderemos lo antes posible.`);
+      alert(`¡Gracias ${name}! Hemos recibido tu mensaje.`);
       e.target.reset();
     }
   </script>
