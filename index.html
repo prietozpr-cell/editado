@@ -247,19 +247,32 @@
       object-fit: cover;
     }
 
-    /* Sección Spotify (Reproductor Embebido) */
+    /* Sección Spotify Modificada */
     .spotify-section {
       text-align: center;
       padding: 2rem 1.5rem 4rem 1.5rem;
     }
 
-    .spotify-wrapper {
-      max-width: 1000px;
-      margin: 0 auto;
+    .spotify-card {
+      background-color: var(--card-bg);
+      padding: 2rem;
       border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
       border: 1px solid rgba(255, 215, 0, 0.2);
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .spotify-iframe-container {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      min-height: 380px;
+      background: #000;
     }
 
     /* Sección Premios */
@@ -526,21 +539,34 @@
     </div>
   </section>
 
-  <!-- Playlist Spotify Embebida -->
+  <!-- Playlist Spotify Embebida + Enlace Directo -->
   <section id="spotify" class="spotify-section">
-    <h2>PLAYLIST OFICIAL</h2>
+    <h2>PLAYLIST OFICIAL BACANO WORLD</h2>
     <p class="section-desc">Escucha la música de nuestra comunidad directamente aquí:</p>
-    <div class="spotify-wrapper">
-      <iframe 
-        style="border-radius:12px" 
-        src="https://open.spotify.com/embed/playlist/4khlrkM64DvTCKyZVYvG81?utm_source=generator&theme=0" 
-        width="100%" 
-        height="352" 
-        frameBorder="0" 
-        allowfullscreen="" 
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-        loading="lazy">
-      </iframe>
+    
+    <div class="spotify-card">
+      <div class="spotify-iframe-container">
+        <iframe 
+          style="border-radius:12px;" 
+          src="https://open.spotify.com/embed/playlist/4khlrkM64DvTCKyZVYvG81?utm_source=generator&theme=0" 
+          width="100%" 
+          height="380" 
+          frameBorder="0" 
+          allowfullscreen="" 
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+          loading="lazy">
+        </iframe>
+      </div>
+      
+      <!-- Botón de respaldo garantizado -->
+      <a 
+        href="https://open.spotify.com/playlist/4khlrkM64DvTCKyZVYvG81?si=63YBAgnfTEWL3EWuipPVYw" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="btn-primary"
+      >
+        Abrir Playlist en Spotify
+      </a>
     </div>
   </section>
 
