@@ -247,6 +247,23 @@
       object-fit: cover;
     }
 
+    /* Sección Spotify */
+    .spotify-section {
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .spotify-container {
+      background-color: var(--card-bg);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
     /* Sección Premios */
     .prizes-grid {
       display: grid;
@@ -508,6 +525,15 @@
       <div class="about-image-wrapper">
         <img src="images/nosotros.jpg" alt="Sobre nosotros" class="about-img">
       </div>
+    </div>
+  </section>
+
+  <!-- Playlist Spotify -->
+  <section id="spotify" class="spotify-section">
+    <h2>NUESTRA PLAYLIST</h2>
+    <div class="spotify-container">
+      <p class="section-desc">Escucha la música oficial de la comunidad en Spotify:</p>
+      <a href="https://open.spotify.com/playlist/4khlrkM64DvTCKyZVYvG81?si=63YBAgnfTEWL3EWuipPVYw&utm_source=copy-link" target="_blank" rel="noopener noreferrer" class="btn-primary">Escuchar en Spotify</a>
     </div>
   </section>
 
