@@ -65,6 +65,7 @@
       border-radius: 12px;
       padding: 1.2rem 1.8rem;
       margin-bottom: 2rem;
+      display: flex;
       flex-direction: column;
       align-items: center;
       gap: 0.8rem;
@@ -94,76 +95,6 @@
       margin-bottom: 1.5rem;
     }
 
-    /* CUADRO CON CUENTA ATRÁS Y BORDES DORADOS EN MOVIMIENTO */
-    @keyframes goldGlowRotate {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    .countdown-container {
-      position: relative;
-      margin: 1.5rem 0 2rem 0;
-      background: var(--card-bg);
-      padding: 1.8rem 2rem;
-      border-radius: 14px;
-      max-width: 600px;
-      width: 100%;
-      transition: opacity 0.5s ease;
-      z-index: 1;
-    }
-
-    .countdown-container::before {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: linear-gradient(90deg, #ffd700, #b8860b, #fff8dc, #ffd700, #ffae00);
-      background-size: 300% 300%;
-      border-radius: 16px;
-      z-index: -1;
-      animation: goldGlowRotate 4s ease infinite;
-    }
-
-    .countdown-title {
-      font-size: 1.05rem;
-      color: var(--text-color);
-      margin-bottom: 1.2rem;
-      font-weight: 600;
-    }
-
-    .timer {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-    }
-
-    .time-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .time-box span {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--accent-color);
-    }
-
-    .time-box label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-
     /* Botones General */
     .btn-primary {
       display: inline-block;
@@ -181,11 +112,6 @@
     .btn-primary:hover {
       transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
-    }
-
-    /* Ocultar botones estrictamente por clase también */
-    #btnInscribeteMain, #heroBanner {
-      display: none !important;
     }
 
     /* Secciones Generales */
@@ -247,7 +173,7 @@
       object-fit: cover;
     }
 
-    /* Sección Spotify (Directa con Botón) */
+    /* Sección Spotify */
     .spotify-section {
       text-align: center;
       padding: 2rem 1.5rem 4rem 1.5rem;
@@ -486,12 +412,6 @@
       .about-container {
         padding: 1.5rem;
       }
-      .timer {
-        gap: 0.8rem;
-      }
-      .time-box span {
-        font-size: 1.5rem;
-      }
     }
   </style>
 </head>
@@ -504,8 +424,8 @@
 
   <!-- Hero Section -->
   <header class="hero">
-    <!-- Bloque superior (Completamente oculto en linea) -->
-    <div class="hero-banner" id="heroBanner" style="display: none !important;">
+    <!-- Bloque superior visible de inscripciones -->
+    <div class="hero-banner" id="heroBanner">
       <h2>FORMULARIOS YA ABIERTOS</h2>
       <a 
         href="https://docs.google.com/forms/d/e/1FAIpQLScReEPVZ1YcUruacPpzO_BmEiFaPpfYRSLTTyqUwsN_-WMLfg/viewform?usp=dialog" 
@@ -522,25 +442,13 @@
     
     <h1>Bienvenido a Bacano World</h1>
 
-    <!-- Cuenta atrás con bordes dorados en movimiento -->
-    <div class="countdown-container" id="countdownContainer">
-      <div class="countdown-title" id="countdownTitle">Las inscripciones para el primer festival de Bacano abrirán en:</div>
-      <div class="timer" id="timerBox">
-        <div class="time-box"><span id="days">00</span><label>Días</label></div>
-        <div class="time-box"><span id="hours">00</span><label>Horas</label></div>
-        <div class="time-box"><span id="minutes">00</span><label>Min</label></div>
-        <div class="time-box"><span id="seconds">00</span><label>Seg</label></div>
-      </div>
-    </div>
-    
-    <!-- Botón Principal (Completamente oculto en linea) -->
+    <!-- Botón Principal de Inscripción directo -->
     <a 
       href="https://docs.google.com/forms/d/e/1FAIpQLScReEPVZ1YcUruacPpzO_BmEiFaPpfYRSLTTyqUwsN_-WMLfg/viewform?usp=dialog" 
       target="_blank" 
       rel="noopener noreferrer" 
       class="btn-primary"
       id="btnInscribeteMain"
-      style="display: none !important;"
     >
       INSCRÍBETE
     </a>
@@ -687,7 +595,7 @@
 
   <!-- Scripts -->
   <script>
-    // 1. Contador Profesional Ultra-Fluido
+    // Contador Profesional Ultra-Fluido
     document.addEventListener("DOMContentLoaded", () => {
       const counters = document.querySelectorAll('.counter');
       const trajectorySection = document.querySelector('#trayectoria');
@@ -735,47 +643,6 @@
         observer.observe(trajectorySection);
       }
     });
-
-    // 2. Control de visibilidad - CAMBIADO A 6 DE AGOSTO A LAS 15:00
-    const targetDate = new Date('2026-08-06T15:00:00+02:00').getTime();
-
-    const checkCountdown = () => {
-      const now = new Date().getTime();
-      const difference = targetDate - now;
-
-      const countdownContainer = document.getElementById("countdownContainer");
-      const heroBanner = document.getElementById("heroBanner");
-      const btnInscribeteMain = document.getElementById("btnInscribeteMain");
-
-      if (difference > 0) {
-        // Asegurar visibilidad oculta mientras cuenta atrás siga activa
-        heroBanner.style.setProperty("display", "none", "important");
-        btnInscribeteMain.style.setProperty("display", "none", "important");
-
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        document.getElementById("days").innerText = days < 10 ? '0' + days : days;
-        document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
-        document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
-        document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
-      } else {
-        // Al terminar la cuenta atrás se hacen visibles
-        clearInterval(countdownInterval);
-        
-        countdownContainer.style.opacity = "0";
-        setTimeout(() => {
-          countdownContainer.style.display = "none";
-          heroBanner.style.setProperty("display", "flex", "important");
-          btnInscribeteMain.style.setProperty("display", "inline-block", "important");
-        }, 500);
-      }
-    };
-
-    const countdownInterval = setInterval(checkCountdown, 1000);
-    checkCountdown();
   </script>
 </body>
 </html>
