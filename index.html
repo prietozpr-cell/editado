@@ -27,6 +27,102 @@
       line-height: 1.6;
     }
 
+    /* ESTILOS EXCLUSIVOS PARA EL NUEVO BOTÓN CON LÍNEAS DORADAS ANIMADAS EN EL CONTORNO */
+    .fest3-banner-container {
+      width: 100%;
+      background: rgba(11, 11, 11, 0.98);
+      padding: 0.8rem 1rem;
+      text-align: center;
+      position: relative;
+      z-index: 102;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .btn-fest3-animated {
+      position: relative;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.65rem 1.8rem;
+      color: #ffd700;
+      background: #0d0d0d;
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(0, 0, 0, 0.8);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    /* Borde / Líneas doradas giratorias alrededor del contorno */
+    .btn-fest3-animated::before {
+      content: '';
+      position: absolute;
+      width: 250%;
+      height: 250%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 160deg,
+        #b8860b 190deg,
+        #ffd700 220deg,
+        #fff8dc 240deg,
+        #ffd700 260deg,
+        #b8860b 280deg,
+        transparent 310deg,
+        transparent 360deg
+      );
+      animation: rotateGoldenBorder 3s linear infinite;
+      z-index: 1;
+    }
+
+    /* Fondo interno para cubrir el centro y dejar únicamente el contorno dorado animado */
+    .btn-fest3-animated::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: linear-gradient(135deg, #181507 0%, #0a0a0a 100%);
+      border-radius: 48px;
+      z-index: 2;
+      transition: background 0.3s ease;
+    }
+
+    /* Texto con efecto metálico por encima de la animación */
+    .btn-fest3-text {
+      position: relative;
+      z-index: 3;
+      background: linear-gradient(180deg, #ffffff 0%, #ffd700 70%, #cca000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+      white-space: nowrap;
+    }
+
+    .btn-fest3-animated:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+    }
+
+    .btn-fest3-animated:hover::after {
+      background: linear-gradient(135deg, #241f0a 0%, #121212 100%);
+    }
+
+    @keyframes rotateGoldenBorder {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
     /* Top Bar / Pestaña ENTRADAS BACANO FEST 2 */
     .top-banner-bar {
       width: 100%;
@@ -446,10 +542,26 @@
       .about-container {
         padding: 1.5rem;
       }
+      .btn-fest3-animated {
+        font-size: 0.8rem;
+        padding: 0.55rem 1.4rem;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- NUEVA BARRITA / AVISO EXCLUSIVO CON EL BOTÓN ENTRADAS BACANO FEST 3 -->
+  <div class="fest3-banner-container">
+    <a 
+      href="https://www.fourvenues.com/bacano-world/0QDH" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="btn-fest3-animated"
+    >
+      <span class="btn-fest3-text">ENTRADAS BACANO FEST 3</span>
+    </a>
+  </div>
 
   <!-- Pestaña Superior de Entradas -->
   <div class="top-banner-bar">
