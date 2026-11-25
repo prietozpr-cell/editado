@@ -14,7 +14,7 @@
       --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-- {
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -38,6 +38,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
       border-bottom: 1px solid rgba(255, 215, 0, 0.2);
     }
 
@@ -517,7 +519,7 @@
 </head>
 <body>
 
-  <!-- NUEVA BARRITA / AVISO EXCLUSIVO CON EL BOTÓN ENTRADAS BACANO FEST 4 -->
+  <!-- BARRITA / AVISO EXCLUSIVO CON LOS BOTONES DE ENTRADAS -->
   <div class="fest4-banner-container">
     <a 
       href="https://www.fourvenues.com/bacano-world/JJEU" 
@@ -527,14 +529,242 @@
     >
       <span class="btn-fest4-text">ENTRADAS BACANO FEST 4</span>
     </a>
-  </div>
-
-  <!-- NUEVA BARRITA / AVISO EXCLUSIVO CON EL BOTÓN ENTRADAS BACANO FEST 5 -->
-  <div class="fest4-banner-container">
     <a 
       href="https://www.fourvenues.com/bacano-world/WLM7" 
       target="_blank" 
       rel="noopener noreferrer" 
       class="btn-fest4-animated"
     >
-      <span class="btn-fest
+      <span class="btn-fest4-text">ENTRADAS BACANO FEST 5</span>
+    </a>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">BACANO WORLD</div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <!-- Bloque superior visible de inscripciones -->
+    <div class="hero-banner" id="heroBanner">
+      <h2>FORMULARIOS YA ABIERTOS</h2>
+      <a 
+        href="https://docs.google.com/forms/d/e/1FAIpQLScReEPVZ1YcUruacPpzO_BmEiFaPpfYRSLTTyqUwsN_-WMLfg/viewform?usp=dialog" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="btn-primary"
+      >
+        INSCRIBIRME AHORA
+      </a>
+    </div>
+
+    <!-- Foto de perfil principal -->
+    <img src="images/perfil.png" alt="Perfil Bacano" class="profile-img">
+    
+    <h1>Bienvenido a Bacano World</h1>
+
+    <!-- Botón Principal de Inscripción directo -->
+    <a 
+      href="https://docs.google.com/forms/d/e/1FAIpQLScReEPVZ1YcUruacPpzO_BmEiFaPpfYRSLTTyqUwsN_-WMLfg/viewform?usp=dialog" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="btn-primary"
+      id="btnInscribeteMain"
+    >
+      INSCRÍBETE
+    </a>
+  </header>
+
+  <!-- Sobre nosotros -->
+  <section id="sobre-nosotros">
+    <h2>Festivales para artistas emergentes</h2>
+    <div class="about-container">
+      <div class="about-content">
+        <p>Organizamos festivales para artistas emergentes y conectamos cantantes, DJs, productores, diseñadores y creativos en un mismo ecosistema para impulsar talento real.</p>
+      </div>
+      <div class="about-image-wrapper">
+        <img src="images/nosotros.jpg" alt="Sobre nosotros" class="about-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Spotify Playlist Directa con Botón -->
+  <section id="spotify" class="spotify-section">
+    <h2>PLAYLIST OFICIAL BACANO WORLD</h2>
+    
+    <div class="spotify-card">
+      <p>Escucha toda la música de nuestros artistas y la comunidad de Bacano directamente en Spotify.</p>
+      <a 
+        href="https://open.spotify.com/playlist/4khlrkM64DvTCKyZVYvG81?si=63YBAgnfTEWL3EWuipPVYw&utm_source=copy-link" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="btn-spotify"
+      >
+        <span>🎵</span> Escuchar Playlist en Spotify
+      </a>
+    </div>
+  </section>
+
+  <!-- Premios -->
+  <section id="premios">
+    <h2>PREMIOS</h2>
+    <p class="section-desc">Bacano World celebrará cinco ediciones. De cada edición saldrán dos ganadores. Una vez finalicen las cinco ediciones, todos los ganadores competirán en una Gran Final.</p>
+
+    <div class="prizes-grid">
+      <!-- 1er Puesto -->
+      <div class="prize-card">
+        <h3>🥇 PRIMER PUESTO</h3>
+        <ul>
+          <li>Actuación en Indomable Party</li>
+          <li>Acceso durante 1 mes a Bacano Agency</li>
+          <li>Camiseta Indomable Football Club manga corta (Selly Studio)</li>
+          <li>Vídeo promocional del artista en las cuentas de Prietoz y Bacano World</li>
+          <li>100 € en productos de GLWP</li>
+          <li>Inscripción directa a la siguiente edición</li>
+        </ul>
+      </div>
+
+      <!-- 2do Puesto -->
+      <div class="prize-card">
+        <h3>🥈 SEGUNDO PUESTO</h3>
+        <ul>
+          <li>Gorra Selly Studio</li>
+          <li>Inscripción directa a la siguiente edición</li>
+          <li>Portada Visualizer de Gold Beat</li>
+          <li>30 € en productos de GLWP</li>
+        </ul>
+      </div>
+
+      <!-- 3er Puesto -->
+      <div class="prize-card">
+        <h3>🥉 TERCER PUESTO</h3>
+        <ul>
+          <li>Camiseta básica Selly Studio</li>
+          <li>Inscripción directa a la siguiente edición</li>
+          <li>Pegatinas GLWP</li>
+          <li>30% de descuento en toda la web de GLWP</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sponsors -->
+  <section id="sponsors">
+    <h2>SPONSORS</h2>
+    <p class="section-desc">Estas son las marcas que hacen posible este proyecto.</p>
+
+    <div class="sponsors-grid">
+      <div class="sponsor-card">
+        <img src="images/sponsor1.png" alt="Sponsor 1" class="sponsor-logo">
+      </div>
+      <div class="sponsor-card">
+        <img src="images/sponsor2.png" alt="Sponsor 2" class="sponsor-logo">
+      </div>
+    </div>
+  </section>
+
+  <!-- Nuestra trayectoria -->
+  <section id="trayectoria">
+    <h2>Nuestra trayectoria</h2>
+    <div class="stats-container">
+      <div class="stat-item">
+        <h3>+<span class="counter" data-target="1000000">0</span></h3>
+        <p>de cuentas alcanzadas</p>
+      </div>
+      <div class="stat-item">
+        <h3>+<span class="counter" data-target="5000">0</span></h3>
+        <p>tickets vendidos</p>
+      </div>
+      <div class="stat-item">
+        <h3>+<span class="counter" data-target="30">0</span></h3>
+        <p>eventos y showcases por España</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulario de Contacto Directo con Formspree -->
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p class="contact-notice">*ESTO NO SON LOS FORMULARIOS DE INSCRIPCION, ES UNICAMENTE PARA PEDIR INFORMACION*</p>
+    <div class="contact-container">
+      <form action="https://formspree.io/f/xyegyyga" method="POST">
+        <div class="form-group">
+          <label for="name">Nombre completo</label>
+          <input type="text" id="name" name="nombre" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="subject">Asunto</label>
+          <input type="text" id="subject" name="asunto" placeholder="Motivo de consulta">
+        </div>
+        <div class="form-group">
+          <label for="message">Mensaje</label>
+          <textarea id="message" name="mensaje" rows="4" placeholder="Escribe tu mensaje..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Enviar mensaje</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Bacano World. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Contador Profesional Ultra-Fluido
+    document.addEventListener("DOMContentLoaded", () => {
+      const counters = document.querySelectorAll('.counter');
+      const trajectorySection = document.querySelector('#trayectoria');
+
+      const animateCounters = () => {
+        const duration = 2500;
+        const startTime = performance.now();
+
+        const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+        const updateCounters = (currentTime) => {
+          const elapsedTime = currentTime - startTime;
+          const progress = Math.min(elapsedTime / duration, 1);
+          const easedProgress = easeOutCubic(progress);
+
+          counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            const currentValue = Math.floor(easedProgress * target);
+            counter.innerText = currentValue.toLocaleString('es-ES');
+          });
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCounters);
+          } else {
+            counters.forEach(counter => {
+              const target = +counter.getAttribute('data-target');
+              counter.innerText = target.toLocaleString('es-ES');
+            });
+          }
+        };
+
+        requestAnimationFrame(updateCounters);
+      };
+
+      const observer = new IntersectionObserver((entries, observerInstance) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            observerInstance.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      if (trajectorySection) {
+        observer.observe(trajectorySection);
+      }
+    });
+  </script>
+</body>
+</html>
